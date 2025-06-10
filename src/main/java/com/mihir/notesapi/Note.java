@@ -21,7 +21,7 @@ public class Note {
         return id;
     }
 
-    public void setId() {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class Note {
         return title;
     }
 
-    public void setTitle() {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -37,7 +37,7 @@ public class Note {
         return content;
     }
 
-    public void setContent() {
+    public void setContent(String content) {
         this.content = content;
     }
 

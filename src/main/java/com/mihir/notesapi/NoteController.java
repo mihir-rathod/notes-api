@@ -1,5 +1,6 @@
 package com.mihir.notesapi;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,5 +26,34 @@ public class NoteController {
     public Note addNote(@RequestBody Note note) {
         notes.add(note);
         return note;
+    }
+
+    // create a PUT API endpoint to update the existing notes in the list of all nodes
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Note> updateNote(@PathVariable int id, @RequestBody Note updatedNote) {
+        for (Note note : notes){
+            if (note.getId() == id){
+                note.setTitle(updatedNote.getTitle());
+                note.setContent(updatedNote.getContent());
+                return ResponseEntity.ok(note); // HTTP 200 (ok)
+            }
+        }
+        return ResponseEntity.notFound().build(); // HTTP 404
+    }
+
+    // create a DELETE API endpoint (delete note)
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Note> deleteNote(@PathVariable int id){
+
+        // using a flag if its true that the note of that id exists, then remove it. If not exists give an error that this id doesn't exist.
+
+        boolean removed = notes.removeIf(note -> note.getId() == id);
+        if(removed){
+            return ResponseEntity.noContent().build(); // HTTP 204
+        }else{
+            return ResponseEntity.notFound().build(); // HTTP 404
+        }
     }
 }
