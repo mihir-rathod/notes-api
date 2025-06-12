@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/notes")
@@ -36,8 +35,17 @@ public class NoteController {
 
     // POST API endpoint to add new notes in the list of all nodes
 
+    // helper function for generating IDs
+    private int generateId() {
+        return notes.size() + 1;
+    }
+
     @PostMapping // responds to HTTP POST at /notes, reads a Note from the request body (JSON), adds it to the list, and returns it
-    public Note addNote(@Valid @RequestBody Note note) {
+    public Note addNote(@Valid @RequestBody NoteRequestDTO noteRequest) {
+        Note note = new Note();
+        note.setId(generateId());
+        note.setTitle(noteRequest.getTitle());
+        note.setContent(noteRequest.getContent());
         notes.add(note);
         return note;
     }
@@ -45,7 +53,7 @@ public class NoteController {
     // PUT API endpoint to update an existing note by ID in the list of all nodes
 
     @PutMapping("/{id}")
-    public ResponseEntity<Note> updateNote(@PathVariable int id, @Valid @RequestBody Note updatedNote) {
+    public ResponseEntity<Note> updateNote(@PathVariable int id, @Valid @RequestBody NoteRequestDTO updatedNote) {
         for (Note note : notes){
             if (note.getId() == id){
                 note.setTitle(updatedNote.getTitle());

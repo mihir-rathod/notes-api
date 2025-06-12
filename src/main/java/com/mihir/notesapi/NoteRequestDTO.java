@@ -2,34 +2,15 @@ package com.mihir.notesapi;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class Note {
-
-    // this is like the meta data of any Note
-    private long id;
+public class NoteRequestDTO {
 
     @NotBlank(message = "Title cannot be blank")
-    private String title;
+    private String title;     // private means only this Note class can access or change this variable directly
 
     @NotBlank(message = "Content cannot be blank")
     private String content;
 
-    // Constructor - it is a special method to create and initialize objects in a class
-
-    public Note(){
-//        this.id = id;
-//        this.title = title;
-//        this.content = content;
-    }
-
     // Getters and Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -45,5 +26,4 @@ public class Note {
     public void setContent(String content) {
         this.content = content;
     }
-
 }
