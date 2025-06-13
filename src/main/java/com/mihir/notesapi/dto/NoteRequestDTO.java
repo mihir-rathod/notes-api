@@ -1,4 +1,4 @@
-package com.mihir.notesapi;
+package com.mihir.notesapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

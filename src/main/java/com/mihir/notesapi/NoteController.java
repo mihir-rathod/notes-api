@@ -1,5 +1,6 @@
 package com.mihir.notesapi;
 
+import com.mihir.notesapi.dto.NoteRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
