@@ -1,24 +1,26 @@
 package com.mihir.notesapi;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class Note {
 
-    // this is like the meta data of any Note
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Title cannot be blank")
+    @Column(nullable = false)
     private String title;
 
     @NotBlank(message = "Content cannot be blank")
+    @Column(nullable = false)
     private String content;
 
     // Constructor - it is a special method to create and initialize objects in a class
 
     public Note(){
-//        this.id = id;
-//        this.title = title;
-//        this.content = content;
     }
 
     // Getters and Setters
@@ -26,7 +28,7 @@ public class Note {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
