@@ -1,6 +1,7 @@
 package com.mihir.notesapi.service;
 
 import com.mihir.notesapi.Note;
+import com.mihir.notesapi.dto.NoteResponseDTO;
 import com.mihir.notesapi.repository.NoteRepository;
 import com.mihir.notesapi.dto.NoteRequestDTO;
 import jakarta.persistence.EntityNotFoundException;
@@ -47,5 +48,15 @@ public class NoteService {
 
     public List<Note> searchNotesByTitle(String title) {
         return noteRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    private NoteResponseDTO mapToResponseDTO(Note note) {
+        NoteResponseDTO dto = new NoteResponseDTO();
+        dto.setId(note.getId());
+        dto.setTitle(note.getTitle());
+        dto.setContent(note.getContent());
+        dto.setCreatedAt(note.getCreatedAt());
+        dto.setUpdatedAt(note.getUpdatedAt());
+        return dto;
     }
 }
